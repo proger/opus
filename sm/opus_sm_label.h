@@ -22,7 +22,7 @@ typedef struct Labeler {
 } Labeler;
 
 Labeler* lb_init(unsigned int sm_thresh, unsigned int b_thresh);
-void     lb_add_frame(Labeler* lb, float pmusic);
+void     lb_add_frame(Labeler* lb, float pmusic, float pactivity);
 void     lb_finalize(Labeler* lb);
 void     lb_print_to_file(Labeler* lb, FILE* ofile, double frame_duration);
 Labeler* lb_destroy(Labeler* lb);

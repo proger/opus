@@ -143,7 +143,7 @@ int process(const char* infile,
 		total_music_ratio += pmusic;
 
 		if (ofp_labels != NULL) {
-			lb_add_frame(lb, pmusic);
+			lb_add_frame(lb, sm->analysis_info.music_prob, sm->analysis_info.activity_probability);
 		}
 
 		fprintf(ofp_pmusic, "%.2f %d %.2f %.2f %.2f %.2f %.2f %.2f %.2f %d %.2f %.2f\n",

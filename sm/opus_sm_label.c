@@ -26,13 +26,17 @@ void lb_add_to_arr(Labeler* lb, Label label) {
 	lb->count++;
 }
 
-char get_label_type(float pmusic) {
-	return (pmusic > 0.5f) ? 'm' : 's';
+char get_label_type(float pmusic, float pactivity) {
+	if (pactivity < 0.5f) {
+		return '.';
+	} else {
+		return (pmusic > 0.5f) ? 'm' : 's';
+	}
 }
 
-void lb_add_frame(Labeler* lb, float pmusic) {
+void lb_add_frame(Labeler* lb, float pmusic, float pactivity) {
 	Label actual_label;
-	actual_label.type = get_label_type(pmusic);
+	actual_label.type = get_label_type(pmusic, pactivity);
 	actual_label.frame_count = 1;
 	int prev = lb->count - 1;
 	int prevprev = lb->count - 2;
