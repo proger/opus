@@ -33,13 +33,16 @@ The program will print the syntax if it is executed without arguments:
     Usage: ./opus_sm_demo <infile> [outfile pmusic] [outfile labels] [sm min dur] [b min dur]
 
         infile           path to a 16 bit, 48KHz sample rate PCM WAVE file
-        outfile pmusic   path of the music probability output file (default: stdout)
+        outfile framewise path of the framewise stats output file (default: stdout)
         outfile labels   path of the labels (m|s|b) output file
         sm min dur       speech & music labeled segments' min duration
         b min dur        both labeled segments' min duration
 
+    framewise output format:
+    timestamp valid tonality tonality_slope noisiness activity music_prob music_prob_min music_prob_max bandwidth activity_probability max_pitch_ratio
+
 It is important to note, that only 16 bit, 48KHz PCM WAVE files are supported. The WAVE file should not contain any metadata. Using ffmpeg to convert an audio file to the expected format:
 
-    ffmpeg -i input.flac -ar 48000 -y -map_metadata -1 -flags +bitexact -acodec pcm_s16le output.wav
+    ffmpeg -i input.flac -ar 48000 -y  -fflags +bitexact -flags:v +bitexact -flags:a +bitexact -acodec pcm_s16le -map_metadata -1 output.wav
 
 That's all folks!

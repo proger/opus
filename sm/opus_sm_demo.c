@@ -31,10 +31,13 @@ void print_syntax(const char* argv0) {
 		printf("Usage: %s <infile> [outfile pmusic] [outfile labels] [sm min dur] [b min dur]\n", argv0);
 		printf("\n");
 		printf("    infile           path to a 16 bit, 48KHz sample rate PCM WAVE file\n");
-		printf("    outfile pmusic   path of the music probability output file (default: stdout)\n");
+		printf("    outfile framewise path of the framewise stats output file (default: stdout)\n");
 		printf("    outfile labels   path of the labels (m|s|b) output file\n");
 		printf("    sm min dur       speech & music labeled segments' min duration\n");
 		printf("    b min dur        both labeled segments' min duration\n");
+		printf("\n");
+		printf("framewise output format:\n");
+		printf("timestamp valid tonality tonality_slope noisiness activity music_prob music_prob_min music_prob_max bandwidth activity_probability max_pitch_ratio\n");
 }
 
 
@@ -143,7 +146,19 @@ int process(const char* infile,
 			lb_add_frame(lb, pmusic);
 		}
 
-		fprintf(ofp_pmusic, "%f %f\n", (double)ii / wave->header.SampleRate, pmusic);
+		fprintf(ofp_pmusic, "%.2f %d %.2f %.2f %.2f %.2f %.2f %.2f %.2f %d %.2f %.2f\n",
+			(double)ii / wave->header.SampleRate,
+			sm->analysis_info.valid,
+			sm->analysis_info.tonality,
+			sm->analysis_info.tonality_slope,
+			sm->analysis_info.noisiness,
+			sm->analysis_info.activity,
+			sm->analysis_info.music_prob,
+			sm->analysis_info.music_prob_min,
+			sm->analysis_info.music_prob_max,
+			sm->analysis_info.bandwidth,
+			sm->analysis_info.activity_probability,
+			sm->analysis_info.max_pitch_ratio);
 
 	}
 
