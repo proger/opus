@@ -211,15 +211,14 @@ endif
 if CUSTOM_MODES
 pkginclude_HEADERS += include/opus_custom.h
 if EXTRA_PROGRAMS
-noinst_PROGRAMS += opus_custom_demo opus_sm_demo
+noinst_PROGRAMS += opus_custom_demo
 opus_custom_demo_SOURCES = celt/opus_custom_demo.c
 opus_custom_demo_LDADD = libopus.la $(LIBM)
-include opus_sm_objs.mk
+
+noinst_PROGRAMS += opus_sm_demo
 opus_sm_demo_SOURCES = sm/wavfile.c sm/opus_sm.c sm/opus_sm_label.c sm/opus_sm_demo.c
-opus_sm_demo_LDFLAGS = $(AM_LDFLAGS) -static
-opus_sm_demo_LDADD = libopus.la \
-$(OPUS_SM_OBJS) \
-$(LIBM)
+opus_sm_demo_LDFLAGS = -static
+opus_sm_demo_LDADD = libopus.la $(LIBM)
 endif
 endif
 

@@ -22,10 +22,8 @@
 #include "wavfile.h"
 #include "opus_sm_label.h"
 
-/* allowed samplerate: 48KHz (Opus encoder does not support 44.1KHz) */
-#define OPUS_SUPPORTED_FS     48000
-//#define ANALYSIS_FRAME_SIZE   (OPUS_SUPPORTED_FS/50)
-#define ANALYSIS_FRAME_SIZE   2880
+#define OPUS_SUPPORTED_FS     SM_SUPPORTED_SAMPLERATE
+#define ANALYSIS_FRAME_SIZE   SM_FRAME_SIZE
 
 void print_syntax(const char* argv0) {
 		printf("SM-Test speech music discriminator program\n");

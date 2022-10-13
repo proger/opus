@@ -56,9 +56,7 @@ float sm_pmusic(OpusSM* sm, float* frame) {
 	/* Values are from opus_encode_float(), opus_encode_native() functions, see src/opus_encoder.c */
 	int c1 = 0;
 	int c2 = -2;
-	int frame_size = compute_frame_size(frame, SM_FRAME_SIZE, sm->opus_enc->variable_duration,
-	                                    sm->opus_enc->channels, sm->opus_enc->Fs, sm->opus_enc->bitrate_bps,
-	                                    sm->delay_compensation, downmix_float, sm->opus_enc->analysis.subframe_mem);
+	int frame_size = frame_size_select(SM_FRAME_SIZE, sm->opus_enc->variable_duration, sm->opus_enc->Fs);
 	run_analysis(&sm->opus_enc->analysis, sm->celt_mode, frame, SM_FRAME_SIZE, frame_size, c1, c2,
 	             sm->opus_enc->channels, sm->opus_enc->Fs, sm->lsb_depth, downmix_float,
 	             &sm->analysis_info);

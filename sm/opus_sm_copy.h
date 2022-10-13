@@ -49,6 +49,12 @@ struct OpusEncoder {
     int          lsb_depth;
     int          encoder_buffer;
     int          lfe;
+    int          arch;
+    int          use_dtx;                 /* general DTX for both SILK and CELT */
+    int          fec_config;
+#ifndef DISABLE_FLOAT_API
+    TonalityAnalysisState analysis;
+#endif
 
 #define OPUS_ENCODER_RESET_START stream_channels
     int          stream_channels;
@@ -61,6 +67,8 @@ struct OpusEncoder {
     int          prev_channels;
     int          prev_framesize;
     int          bandwidth;
+    /* Bandwidth determined automatically from the rate (before any other adjustment) */
+    int          auto_bandwidth;
     int          silk_bw_switch;
     /* Sampling rate (at the API level) */
     int          first;
@@ -68,18 +76,14 @@ struct OpusEncoder {
     StereoWidthState width_mem;
     opus_val16   delay_buffer[MAX_ENCODER_BUFFER*2];
 #ifndef DISABLE_FLOAT_API
-    TonalityAnalysisState analysis;
     int          detected_bandwidth;
-    int          analysis_offset;
+    int          nb_no_activity_ms_Q1;
+    opus_val32   peak_signal_energy;
 #endif
+    int          nonfinal_frame; /* current frame is not the final in a packet */
     opus_uint32  rangeFinal;
-    int arch;
 };
 
 void downmix_float(const void *_x, opus_val32 *sub, int subframe, int offset, int c1, int c2, int C);
-
-opus_int32 compute_frame_size(const void *analysis_pcm, int frame_size,
-      int variable_duration, int C, opus_int32 Fs, int bitrate_bps,
-      int delay_compensation, downmix_func downmix, opus_val32 *subframe_mem);
 
 #endif /* _OPUS_SM_COPY_H_ */
