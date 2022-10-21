@@ -215,10 +215,10 @@ noinst_PROGRAMS += opus_custom_demo
 opus_custom_demo_SOURCES = celt/opus_custom_demo.c
 opus_custom_demo_LDADD = libopus.la $(LIBM)
 
-noinst_PROGRAMS += opus_sm_demo
-opus_sm_demo_SOURCES = sm/wavfile.c sm/opus_sm.c sm/opus_sm_label.c sm/opus_sm_demo.c
-opus_sm_demo_LDFLAGS = -static
-opus_sm_demo_LDADD = libopus.la $(LIBM)
+noinst_PROGRAMS += vad
+vad_SOURCES = sm/wavfile.c sm/opus_sm.c sm/opus_sm_label.c sm/opus_sm_demo.c
+vad_LDFLAGS = -static
+vad_LDADD = libopus.la $(LIBM)
 endif
 endif
 

@@ -1,7 +1,7 @@
 Opus speech vs. music discriminator
 ===================================
 
-![Example fig](https://github.com/jzombi/opus_sm/sm/screenshot.png "Segmentation, framewise music probabilities, waveform")
+![Example fig](https://github.com/jzombi/opus_sm/blob/master/sm/example.png "Segmentation, framewise music probabilities, waveform")
 
 Command line speech vs. music discriminator tool based on the built in speech vs. music discriminator of the Opus codec. This tool calculates the framewise music probabilities for a given audio file. Optionally also provides speech-music segmentation. See above example figure showing the segmentation, the framewise music probabilities and the waveform of an [example audio file](https://media.xiph.org/monty/demo/opus-3/speech_music_test.wa)v.
 
@@ -16,7 +16,7 @@ The tool is built when the `custom-modes` flag is enabled (it is enabled by defa
     ./configure
     make
 
-The resulting executable `opus_sm_demo` is statically linked against opus libraries. This way it can be distributed individually.
+The resulting executable `vad` is statically linked against opus libraries. This way it can be distributed individually.
 
 To disable `custom-modes`, and thus this tool:
 
@@ -27,10 +27,10 @@ Usage
 
 The program will print the syntax if it is executed without arguments:
 
-    ./opus_sm_demo
+    ./vad
     SM-Test speech music discriminator program
 
-    Usage: ./opus_sm_demo <infile> [outfile pmusic] [outfile labels] [sm min dur] [b min dur]
+    Usage: ./vad <infile> [outfile pmusic] [outfile labels] [sm min dur] [b min dur]
 
         infile           path to a 16 bit, 48KHz sample rate PCM WAVE file
         outfile framewise path of the framewise stats output file (default: stdout)
